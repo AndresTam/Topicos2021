@@ -14,11 +14,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import sample.views.Calculadora;
 import sample.views.Encriptador;
 import sample.views.Rompecabezas;
 
-public class Main extends Application {
+public class Main extends Application implements EventHandler<WindowEvent> {
     private VBox vBox;
     private MenuBar mnbPrincipal;
     private Menu menCompetencia1, menCompetencia2, menCerrar;
@@ -31,6 +32,7 @@ public class Main extends Application {
 
         CrearMenu();
 
+        primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, this);
         primaryStage.setTitle("Proyecto de Clase TAP 2021");
         primaryStage.setScene(escena);
         primaryStage.setMaximized(true);
@@ -59,6 +61,7 @@ public class Main extends Application {
         vBox.getChildren().add(mnbPrincipal);
 
         escena = new Scene(vBox, 300, 70);
+        escena.getStylesheets().add(getClass().getResource("css/styles.css").toExternalForm());
     }
 
     private void opcionesMenu(int opc){
@@ -71,5 +74,14 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void handle(WindowEvent event) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Mensaje del Sistema");
+        alerta.setHeaderText("Gracias por usar el programa :)");
+        alerta.setContentText("Vuelva pronto");
+        alerta.showAndWait();
     }
 }

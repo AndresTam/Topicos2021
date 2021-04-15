@@ -1,0 +1,27 @@
+.root{
+    -fx-background-image: url(/sample/assets/si.png), url(/sample/assets/Logo.png);
+    -fx-background-repeat: stretch, no-repeat;
+    -fx-background-size: auto;
+    -fx-background-position: center, right bottom;
+}
+
+.menu-bar{
+    -fx-background-color: #51A11E;
+    -fx-border-color: #000;
+    -fx-border-width: 2;
+}
+
+.menu:hover{
+    -fx-background-color: #000;
+    -fx-font-weight: bold;
+}
+
+.label:hover{
+    -fx-font-size: 15;
+    -fx-text-fill: green;
+}
+
+.menu-item{
+    -fx-background-color: #4E9A1B;
+    -fx-border-color: #000;
+}
