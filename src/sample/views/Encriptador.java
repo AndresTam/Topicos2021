@@ -1,6 +1,7 @@
 package sample.views;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -10,8 +11,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
 import javafx.scene.control.TextArea;
+import javafx.stage.StageStyle;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 public class Encriptador extends Stage implements EventHandler<KeyEvent> {
 
@@ -24,6 +29,8 @@ public class Encriptador extends Stage implements EventHandler<KeyEvent> {
     private Button btnEncriptar;
     private Button btnTolAbrir;
     private FileChooser fileChooser;
+    private FileReader fileReader;
+    private BufferedReader bufferedReader;
 
     public Encriptador(){
         CrearUI();
@@ -45,9 +52,11 @@ public class Encriptador extends Stage implements EventHandler<KeyEvent> {
 
         hBox       = new HBox();
         txtEntrada = new TextArea();
+        txtEntrada.setWrapText(true);
         txtEntrada.setOnKeyPressed(this);
 
         txtSalida  = new TextArea();
+        txtSalida.setWrapText(true);
         txtSalida.setEditable(false);
 
         btnEncriptar = new Button();
@@ -62,22 +71,55 @@ public class Encriptador extends Stage implements EventHandler<KeyEvent> {
     }
 
     private void encriptarEntrada(){
-
+        String codigo = "";
+        String entrada = txtEntrada.getText();
+        if(!entrada.equals("")){
+            for (int i = 0; i<entrada.length(); i++){
+                codigo += (int)entrada.charAt(i) +" ";
+                txtSalida.setText(codigo);
+            }
+        } else{
+            Alert dialAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            dialAlert.setTitle("Error");
+            dialAlert.setHeaderText(null);
+            dialAlert.setContentText("El campo de entrada no debe estar vacio");
+            dialAlert.initStyle(StageStyle.UTILITY);
+            dialAlert.showAndWait();
+        }
     }
 
     private void abrirArchivo(){
         fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar archivo a encriptar: ");
-        fileChooser.showOpenDialog(this);
+        File file = fileChooser.showOpenDialog(this);
+        if(file != null){
+            fileReader = null;
+            bufferedReader = null;
+            String texto = "";
+            try{
+                fileReader = new FileReader(file);
+                bufferedReader = new BufferedReader(fileReader);
+                String st = bufferedReader.readLine();
+                while(st != null){
+                    texto += st + "\n";
+                    st = bufferedReader.readLine();
+                    System.out.println(texto);
+                }
+            } catch(Exception e){
+                System.out.println(e);
+            } finally {
+                try{
+                    fileReader.close();
+                } catch(Exception e2){
+                    System.out.println(e2);
+                }
+            }
+            txtEntrada.setText(texto);
+        }
     }
 
     @Override
     public void handle(KeyEvent event) {
-        //txtSalida.appendText(event.getCode().ordinal() + "");
-        switch (event.getCode().toString()){
-            case "A":
-                txtSalida.appendText("b");
-                break;
-        }
+
     }
 }
