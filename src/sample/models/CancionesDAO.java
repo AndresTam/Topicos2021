@@ -105,11 +105,13 @@ public class CancionesDAO {
             ResultSet res = stmt.executeQuery(query);
             while(res.next()){
                 objC = new CancionesDAO();
-                objC.id_cancion = res.getInt("id_cancion");
+                objC.id_cancion     = res.getInt("id_cancion");
                 objC.nombre_cancion = res.getString("nombre_cancion");
-                objC.duracion = res.getInt("duracion");
-                objC.portada = res.getString("portada");
-                objC.letra = res.getString("letra");
+                objC.duracion       = res.getInt("duracion");
+                objC.portada        = res.getString("portada");
+                objC.anio           = res.getInt("anio");
+                objC.letra          = res.getString("letra");
+                listaC.add(objC);
             }
         } catch(Exception ex){
             ex.printStackTrace();

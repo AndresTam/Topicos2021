@@ -1,23 +1,17 @@
 package sample.models;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class conector {
-    private static String server    = "localhost:1433";
-    private static String user      = "sa";
-    private static String password  = "martinez56.";
-    private static String db        = "db_escuela";
-    private static String loginTime = "30";
-    public  static Connection conn = null;
+    private static String server    = "jdbc:mysql://localhost:3306/musica";
+    private static String user      = "root";
+    private static String password  = "root";
+    public  static Connection conn;
 
     public static Connection getConection(){
         try{
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://"+server+";database="+db+";user="+user+";password="+password+";loginTimeout="+loginTime+";";
-            conn = DriverManager.getConnection(url);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(server, user, password);
             return conn;
         }catch(Exception ex){
             System.out.println(ex);
@@ -25,3 +19,5 @@ public class conector {
         }
     }
 }
+
+
