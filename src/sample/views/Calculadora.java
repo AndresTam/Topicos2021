@@ -5,12 +5,14 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.Arrays;
 
@@ -56,10 +58,12 @@ public class Calculadora extends Stage implements EventHandler {
                     @Override
                     public void handle(MouseEvent event) {
                         String caract = "" + event.getSource();
+                        System.out.println(btnPresionado(caract));
                         if(!String.valueOf(btnPresionado(caract)).equals("=")){
                             cadena += btnPresionado(caract);
                             if(!String.valueOf(btnPresionado(caract)).equals("+") && !String.valueOf(btnPresionado(caract)).equals("-")
-                            && !String.valueOf(btnPresionado(caract)).equals("*") && !String.valueOf(btnPresionado(caract)).equals("/")){
+                            && !String.valueOf(btnPresionado(caract)).equals("*") && !String.valueOf(btnPresionado(caract)).equals("/")
+                            && !String.valueOf(btnPresionado(caract)).equals(".")){
                                 numeros += btnPresionado(caract);
                                 //txtOperacion.setText("" + btnPresionado(caract));
                                 txtOperacion.setText(cadena);
@@ -76,11 +80,38 @@ public class Calculadora extends Stage implements EventHandler {
                                 }
                             }
                         } else{
-                            txtOperacion.setText(String.valueOf(jerarCalc(numeros,operando, operaciones)));
-                            cadena = "";
-                            operando = "";
-                            numeros = "";
-                            operaciones = 0;
+                            for(int i = 0; i < numeros.length(); i++){
+                                if (numeros.charAt(i) == '/' || numeros.charAt(i) == '+' || numeros.charAt(i) == '/'
+                                  || numeros.charAt(i) == '*' || numeros == "-"){
+                                    Alert dialAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                                    dialAlert.setTitle("Error");
+                                    dialAlert.setHeaderText(null);
+                                    dialAlert.setContentText("La entrada que has ingresado no es correcta");
+                                    dialAlert.initStyle(StageStyle.UTILITY);
+                                    dialAlert.showAndWait();
+                                    cadena = "";
+                                    operando = "";
+                                    numeros = "";
+                                    operaciones = 0;
+                                } else if(numeros.equals("-") || numeros.equals("--")){
+                                    Alert dialAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                                    dialAlert.setTitle("Error");
+                                    dialAlert.setHeaderText(null);
+                                    dialAlert.setContentText("La entrada que has ingresado no es correcta");
+                                    dialAlert.initStyle(StageStyle.UTILITY);
+                                    dialAlert.showAndWait();
+                                    cadena = "";
+                                    operando = "";
+                                    numeros = "";
+                                    operaciones = 0;
+                                } else{
+                                    txtOperacion.setText(String.valueOf(jerarCalc(numeros,operando, operaciones)));
+                                    cadena = "";
+                                    operando = "";
+                                    numeros = "";
+                                    operaciones = 0;
+                                }
+                            }
                         }
                     }
                 });

@@ -23,7 +23,7 @@ public class Main extends Application implements EventHandler<WindowEvent> {
     private VBox vBox;
     private MenuBar mnbPrincipal;
     private Menu menCompetencia1, menCompetencia2, menCerrar;
-    private MenuItem mitCalcu, mitRompecabezas, mitEncriptar, mitBDCanciones, mitCorredores, mitSalir;
+    private MenuItem mitCalcu, mitRompecabezas, mitEncriptar, mitBDCanciones, mitCorredores, mitSocket, mitSalir;
     private Scene escena;
 
     @Override
@@ -69,7 +69,9 @@ public class Main extends Application implements EventHandler<WindowEvent> {
 
         mitCorredores = new MenuItem("Ejecución de Hilos");
         mitCorredores.setOnAction(event -> opcionesMenu(5));
-        menCompetencia2.getItems().addAll(mitCorredores);
+        mitSocket = new MenuItem("Manejo de Sockets");
+        mitSocket.setOnAction(event -> opcionesMenu(6));
+        menCompetencia2.getItems().addAll(mitCorredores, mitSocket);
 
         mitSalir = new MenuItem("Salir");
         mitSalir.setOnAction(event -> {System.exit(0);});
@@ -82,11 +84,12 @@ public class Main extends Application implements EventHandler<WindowEvent> {
 
     private void opcionesMenu(int opc){
         switch (opc){
-            case 1: new Calculadora(); break;
+            case 1: new Calculadora().show();  break;
             case 2: new Rompecabezas().show(); break;
-            case 3: new Encriptador().show(); break;
+            case 3: new Encriptador().show();  break;
             case 4: new FrmCanciones().show(); break;
-            case 5: new Pista().show(); break;
+            case 5: new Pista().show();        break;
+            case 6: new ClienteSocket().connectToServer(); break;
         }
     }
 

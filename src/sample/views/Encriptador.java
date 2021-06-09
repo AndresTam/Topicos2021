@@ -41,8 +41,8 @@ public class Encriptador extends Stage implements EventHandler<KeyEvent> {
     }
 
     private void CrearUI(){
-        vBox       = new VBox();
-        tolMenu    = new ToolBar();
+        vBox        = new VBox();
+        tolMenu     = new ToolBar();
         btnTolAbrir = new Button();
         ImageView imv = new ImageView("sample/assets/iconfolder_open.png");
         imv.setFitWidth(35);
