@@ -1,6 +1,4 @@
 package sample.views;
-import com.sun.xml.internal.ws.commons.xmlutil.Converter;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,8 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.util.Arrays;
 
 
 public class Calculadora extends Stage implements EventHandler {

@@ -1,21 +1,14 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import sample.componentes.Corredor;
 import sample.views.*;
 import sample.models.conector;
 
@@ -84,7 +77,7 @@ public class Main extends Application implements EventHandler<WindowEvent> {
 
     private void opcionesMenu(int opc){
         switch (opc){
-            case 1: new Calculadora().show();  break;
+            case 1: new Calculador().show();  break;
             case 2: new Rompecabezas().show(); break;
             case 3: new Encriptador().show();  break;
             case 4: new FrmCanciones().show(); break;
